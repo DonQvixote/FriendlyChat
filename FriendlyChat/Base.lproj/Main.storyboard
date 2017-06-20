@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SignInViewController" customModule="FriendlyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friendly Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TV-i2-7Mp">
+                                <rect key="frame" x="98.5" y="203" width="177" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3r3-Oh-jPm" customClass="GIDSignInButton">
+                                <rect key="frame" x="109" y="309" width="156" height="48"/>
+                                <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="EZJ-6X-ycr"/>
+                                    <constraint firstAttribute="width" constant="156" id="nqy-HF-YjC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6TV-i2-7Mp" firstAttribute="centerX" secondItem="3r3-Oh-jPm" secondAttribute="centerX" id="Q3i-hc-Yxb"/>
+                            <constraint firstItem="3r3-Oh-jPm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SDE-rq-E1f"/>
+                            <constraint firstItem="3r3-Oh-jPm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ULg-JY-O1W"/>
+                            <constraint firstItem="3r3-Oh-jPm" firstAttribute="top" secondItem="6TV-i2-7Mp" secondAttribute="bottom" constant="70" id="qe8-td-cUP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="signInButton" destination="3r3-Oh-jPm" id="xnx-lf-jSu"/>
+                        <segue destination="LZH-Jr-C1f" kind="show" identifier="SignInToFP" id="j4B-K1-2DI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="188" y="138.98050974512745"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Qq2-zq-5xx">
+            <objects>
+                <viewController id="LZH-Jr-C1f" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xsK-a9-jc1"/>
+                        <viewControllerLayoutGuide type="bottom" id="5z5-aG-e5G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wyb-YI-wDi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5aL-WH-WQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="139"/>
+        </scene>
+    </scenes>
+</document>
