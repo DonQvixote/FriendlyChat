@@ -11,11 +11,11 @@
 		0EB2B04F1EF95CEB00828DAF /* FriendlyChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2B04E1EF95CEB00828DAF /* FriendlyChatViewController.swift */; };
 		0EB2B0521EF95CEB00828DAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0501EF95CEB00828DAF /* Main.storyboard */; };
 		0EB2B0541EF95CEB00828DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0531EF95CEB00828DAF /* Assets.xcassets */; };
-		0EB2B0571EF95CEB00828DAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0551EF95CEB00828DAF /* LaunchScreen.storyboard */; };
 		0EB2B0611EF95F4D00828DAF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B0601EF95F4D00828DAF /* GoogleService-Info.plist */; };
 		0EB2B0631EF963EB00828DAF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2B0621EF963EB00828DAF /* SignInViewController.swift */; };
 		0EB2B0651EF9679500828DAF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2B0641EF9679500828DAF /* Constants.swift */; };
 		0EB2B0671EF96A7200828DAF /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB2B0661EF96A7200828DAF /* MeasurementHelper.swift */; };
+		0EB2B06D1EF9926F00828DAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EB2B06C1EF9926F00828DAF /* LaunchScreen.xib */; };
 		3C8A0F4041565A6C64CA78CF /* Pods_FriendlyChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F6B802D632E1BC051933C6 /* Pods_FriendlyChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,12 +25,12 @@
 		0EB2B04E1EF95CEB00828DAF /* FriendlyChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendlyChatViewController.swift; sourceTree = "<group>"; };
 		0EB2B0511EF95CEB00828DAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0EB2B0531EF95CEB00828DAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0EB2B0561EF95CEB00828DAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EB2B0581EF95CEB00828DAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EB2B0601EF95F4D00828DAF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0EB2B0621EF963EB00828DAF /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		0EB2B0641EF9679500828DAF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0EB2B0661EF96A7200828DAF /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
+		0EB2B06C1EF9926F00828DAF /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		54F6B802D632E1BC051933C6 /* Pods_FriendlyChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendlyChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2582FC4325DB958021DAD3 /* Pods-FriendlyChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendlyChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FriendlyChat/Pods-FriendlyChat.debug.xcconfig"; sourceTree = "<group>"; };
 		C14C589DB7D61C437FF6E44E /* Pods-FriendlyChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FriendlyChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FriendlyChat/Pods-FriendlyChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,8 +75,8 @@
 				0EB2B0641EF9679500828DAF /* Constants.swift */,
 				0EB2B0661EF96A7200828DAF /* MeasurementHelper.swift */,
 				0EB2B0501EF95CEB00828DAF /* Main.storyboard */,
+				0EB2B06C1EF9926F00828DAF /* LaunchScreen.xib */,
 				0EB2B0531EF95CEB00828DAF /* Assets.xcassets */,
-				0EB2B0551EF95CEB00828DAF /* LaunchScreen.storyboard */,
 				0EB2B0601EF95F4D00828DAF /* GoogleService-Info.plist */,
 				0EB2B0581EF95CEB00828DAF /* Info.plist */,
 			);
@@ -163,7 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EB2B0571EF95CEB00828DAF /* LaunchScreen.storyboard in Resources */,
+				0EB2B06D1EF9926F00828DAF /* LaunchScreen.xib in Resources */,
 				0EB2B0611EF95F4D00828DAF /* GoogleService-Info.plist in Resources */,
 				0EB2B0541EF95CEB00828DAF /* Assets.xcassets in Resources */,
 				0EB2B0521EF95CEB00828DAF /* Main.storyboard in Resources */,
@@ -242,14 +242,6 @@
 				0EB2B0511EF95CEB00828DAF /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0EB2B0551EF95CEB00828DAF /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0EB2B0561EF95CEB00828DAF /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
