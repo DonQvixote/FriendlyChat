@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import Contacts
 import Firebase
 import GoogleSignIn
 import GoogleMobileAds
@@ -43,21 +44,21 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
     }
     
     @IBAction func inviteTapped(_ sender: Any) {
-        if let invite = FIRInvites.inviteDialog() {
-            invite.setInviteDelegate(self)
-            
-            // NOTE: You must have the App Store ID set in your developer console project
-            // in order for invitations to successfully be sent.
-            
-            // A message hint for the dialog. Note this manifests differently depending on the
-            // received invitation type. For example, in an email invite this appears as the subject.
-            invite.setMessage("Try this out!\n -\(FIRAuth.auth()?.currentUser?.displayName ?? "")")
-            // Title for the dialog, this is what the user sees before sending the invites.
-            invite.setTitle("FriendlyChat")
-            invite.setDeepLink("app_url")
-            invite.setCallToActionText("Install!")
-            invite.setCustomImage("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png")
-            invite.open()
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .denied, .restricted:
+            showAlert(withTitle: nil, message: "Allow FriendlyChat to access your contacts in \"Settings\"->\"Privacy\"->\"Contacts\"")
+        case .notDetermined:
+            CNContactStore().requestAccess(for: .contacts) { (granted, error) in
+                if let error = error {
+                    print("Error: \(String(describing: error))")
+                } else {
+                    if granted {
+                        self.sendInviteMessage()
+                    }
+                }
+            }
+        case .authorized:
+            sendInviteMessage()
         }
     }
     
@@ -72,15 +73,35 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
     }
     
     @IBAction func didTapAddPhoto(_ sender: UIButton) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-            picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
-        }
+//        switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+//        case .denied, .restricted:
+//            showAlert(withTitle: nil, message: "Allow FriendlyChat to access your camera in \"Settings\"->\"Privacy\"->\"Camera\"")
+//        case .notDetermined:
+//            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { granted in
+//                if granted {
+//                    
+//                }
+//            }
+//        case .authorized:
+//            break
+//        }
         
-        present(picker, animated: true, completion: nil)
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied, .restricted:
+            showAlert(withTitle: nil, message: "Allow FriendlyChat to access your photos in \"Settings\"->\"Privacy\"->\"Photos\"")
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ status in
+                if status == PHAuthorizationStatus.authorized {
+                    DispatchQueue.main.async { [weak self] in
+                        if let strongSelf = self {
+                            strongSelf.presentImagePicker()
+                        }
+                    }
+                }
+            })
+        case .authorized:
+            presentImagePicker()
+        }
     }
     
     @IBAction func didSendMessage(_ sender: UIButton) {
@@ -94,6 +115,7 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
         self.clientTable.register(UITableViewCell.self, forCellReuseIdentifier: "tableViewCell")
         clientTable.dataSource = self
         clientTable.delegate = self
+        clientTable.separatorStyle = .none
         
         configureDatabase()
         configureStorage()
@@ -180,6 +202,25 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
         // Push data to Firebase Database
         self.ref.child("messages").childByAutoId().setValue(mdata)
     }
+    
+    func sendInviteMessage() {
+        if let invite = FIRInvites.inviteDialog() {
+            invite.setInviteDelegate(self)
+            
+            // NOTE: You must have the App Store ID set in your developer console project
+            // in order for invitations to successfully be sent.
+            
+            // A message hint for the dialog. Note this manifests differently depending on the
+            // received invitation type. For example, in an email invite this appears as the subject.
+            invite.setMessage("Try this out!\n -\(FIRAuth.auth()?.currentUser?.displayName ?? "")")
+            // Title for the dialog, this is what the user sees before sending the invites.
+            invite.setTitle("FriendlyChat")
+            invite.setDeepLink("app_url")
+            invite.setCallToActionText("Install!")
+            invite.setCustomImage("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png")
+            invite.open()
+        }
+    }
 
     func inviteFinished(withInvitations invitationIds: [Any], error: Error?) {
         if let error = error {
@@ -199,7 +240,19 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
         self.banner.load(GADRequest())
     }
     
-    func showAlert(withTitle title: String, message: String) {
+    func presentImagePicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+//            picker.sourceType = .camera
+//        } else {
+//            picker.sourceType = .photoLibrary
+//        }
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func showAlert(withTitle title: String?, message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let dismissAction = UIAlertAction(title: "Dismiss", style: .destructive, handler: nil)
@@ -211,6 +264,10 @@ class FriendlyChatViewController: UIViewController, FIRInviteDelegate {
 
 extension FriendlyChatViewController: UITableViewDelegate, UITableViewDataSource {
     // UITableViewDataSource protocol methods
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
@@ -234,7 +291,7 @@ extension FriendlyChatViewController: UITableViewDelegate, UITableViewDataSource
                         cell.setNeedsLayout()
                     }
                 }
-            } else if let URL = URL(string: imageURL), let data = try? Data(contentsOf: URL) {
+            } else if let url = URL(string: imageURL), let data = try? Data(contentsOf: url) {
                 cell.imageView?.image = UIImage(data: data)
             }
             cell.textLabel?.text = "sent by: \(name)"
